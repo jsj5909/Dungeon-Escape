@@ -54,6 +54,13 @@ public class Player : MonoBehaviour
         {
             _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, _jumpForce);
             StartCoroutine(ResetJumpNeededRoutine());
+
+            _playerAnimation.Jump(true);
+        }
+
+        if(IsGrounded())
+        {
+            _playerAnimation.Jump(false) ;
         }
 
         _playerAnimation.Move(move);
@@ -79,8 +86,13 @@ public class Player : MonoBehaviour
 
         if (hitInfo.collider != null)
         {
-            if(_resetJumpNeeded == false)
+           
+            
+            if (_resetJumpNeeded == false)
+            {
+                _playerAnimation.Jump(false);
                 return true;
+            }
             
         }
 
