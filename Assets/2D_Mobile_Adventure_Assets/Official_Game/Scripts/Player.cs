@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Player : MonoBehaviour
 
 
     private SpriteRenderer _playerSprite;
+    private SpriteRenderer _arcSprite;
 
     private bool _grounded = true;
 
@@ -16,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
 
     private PlayerAnimation _playerAnimation;
+
+    
 
     private bool _resetJumpNeeded = false;
     // Start is called before the first frame update
@@ -29,6 +33,8 @@ public class Player : MonoBehaviour
 
         _playerSprite = GetComponentInChildren<SpriteRenderer>();
 
+        _arcSprite = transform.GetChild(1).GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
@@ -37,10 +43,15 @@ public class Player : MonoBehaviour
 
         Movement();
 
-        
+        if(Input.GetMouseButtonDown(0) && IsGrounded())
+        {
+            _playerAnimation.Attack();
+        }
       
         
     }
+
+    
 
     void Movement()
     {
@@ -72,11 +83,23 @@ public class Player : MonoBehaviour
         if (move > 0)
         {
             _playerSprite.flipX = false;
+            _arcSprite.flipX = false;
+            _arcSprite.flipY = false;
+
+            Vector3 newPos = _arcSprite.transform.localPosition;
+            newPos.x = 1.01f;
+            _arcSprite.transform.localPosition = newPos;
         }
         else
        if (move < 0)
         {
             _playerSprite.flipX = true;
+            _arcSprite.flipX = true;
+            _arcSprite.flipY = true;
+
+            Vector3 newPos = _arcSprite.transform.localPosition;
+            newPos.x = -1.01f;
+            _arcSprite.transform.localPosition = newPos;
         }
     }
 
