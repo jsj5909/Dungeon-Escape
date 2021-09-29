@@ -81,17 +81,25 @@ public abstract class Enemy : MonoBehaviour
         if(isHit == false)
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
-        //check for player distance to enemy
-        //if greater than 2 is hit = false;
-        //in combat = false
-
        
 
         if(Vector3.Distance(player.position, transform.position) > 2.0f )
         {
             isHit = false;
             animator.SetBool("InCombat", false);
-        }    
+        }
+
+        Vector3 direction = player.position - transform.position;
+
+        if(direction.x < 0 && animator.GetBool("InCombat") == true)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if( direction.x > 0 && animator.GetBool("InCombat") == true)
+        {
+            spriteRenderer.flipX = false;
+        }
+
 
     }
 
