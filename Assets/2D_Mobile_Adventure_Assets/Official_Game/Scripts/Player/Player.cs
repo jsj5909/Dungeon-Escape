@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour,IDamageable
 {
     private Rigidbody2D _rigidBody;
 
@@ -22,6 +22,9 @@ public class Player : MonoBehaviour
     
 
     private bool _resetJumpNeeded = false;
+
+    public int Health { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -132,5 +135,8 @@ public class Player : MonoBehaviour
         _resetJumpNeeded = false;
    }
 
-
+    public void Damage()
+    {
+        Debug.Log("Player Damaged");
+    }
 }

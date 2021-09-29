@@ -18,10 +18,21 @@ public class Skeleton : Enemy, IDamageable
     {
         Health--;
 
+
+
         animator.SetTrigger("Hit");
+        
+
+
+
+        isHit = true;
+
+        animator.SetBool("InCombat", true);
 
         if (Health < 1)
             Destroy(gameObject);
+
+
     }
 
 }

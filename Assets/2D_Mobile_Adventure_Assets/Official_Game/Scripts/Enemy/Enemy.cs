@@ -11,6 +11,10 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField]
     protected int gems;
 
+    protected bool isHit = false;
+
+    protected Transform player;
+
     [SerializeField]
     protected Transform pointA, pointB;
 
@@ -28,6 +32,9 @@ public abstract class Enemy : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        player = GameObject.Find("Player").transform;
+
     }
 
     private void Start()
@@ -71,8 +78,21 @@ public abstract class Enemy : MonoBehaviour
 
         }
 
+        if(isHit == false)
+            transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
-        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        //check for player distance to enemy
+        //if greater than 2 is hit = false;
+        //in combat = false
+
+       
+
+        if(Vector3.Distance(player.position, transform.position) > 2.0f )
+        {
+            isHit = false;
+            animator.SetBool("InCombat", false);
+        }    
+
     }
 
 
