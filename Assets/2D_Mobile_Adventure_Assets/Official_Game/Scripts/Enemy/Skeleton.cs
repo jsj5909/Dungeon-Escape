@@ -18,7 +18,7 @@ public class Skeleton : Enemy, IDamageable
     {
         Health--;
 
-
+        Debug.Log("Skeleton Hit");
 
         animator.SetTrigger("Hit");
         
@@ -30,7 +30,10 @@ public class Skeleton : Enemy, IDamageable
         animator.SetBool("InCombat", true);
 
         if (Health < 1)
-            Destroy(gameObject);
+        {
+            isDead = true;
+            animator.SetTrigger("Death");
+        }
 
 
     }

@@ -24,9 +24,12 @@ public class Spider : Enemy,IDamageable
     public void Damage()
     {
         Health--;
-        
+
         if (Health < 1)
-            Destroy(this.gameObject);
+        {
+            animator.SetTrigger("Death");
+            isDead = true;
+        }
     }
 
     public void Attack()

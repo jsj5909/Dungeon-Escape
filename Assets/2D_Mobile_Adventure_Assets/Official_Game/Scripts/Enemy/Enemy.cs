@@ -26,6 +26,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected Vector3 target;
 
+    protected bool isDead = false;
 
     public virtual void Init()
     {
@@ -78,7 +79,7 @@ public abstract class Enemy : MonoBehaviour
 
         }
 
-        if(isHit == false)
+        if(isHit == false && isDead == false)
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
        

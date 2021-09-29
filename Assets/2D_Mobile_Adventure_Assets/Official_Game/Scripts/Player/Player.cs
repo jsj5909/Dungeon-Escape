@@ -137,6 +137,13 @@ public class Player : MonoBehaviour,IDamageable
 
     public void Damage()
     {
+        Health--;
+
+        if(Health < 1)
+        {
+            
+        }
+
         Debug.Log("Player Damaged");
     }
 }
