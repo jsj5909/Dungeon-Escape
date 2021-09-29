@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour,IDamageable
 {
+    public int diamonds { get; set; }
+    
     private Rigidbody2D _rigidBody;
 
 
@@ -37,6 +39,8 @@ public class Player : MonoBehaviour,IDamageable
         _playerSprite = GetComponentInChildren<SpriteRenderer>();
 
         _arcSprite = transform.GetChild(1).GetComponent<SpriteRenderer>();
+
+        diamonds = 0;
 
     }
 

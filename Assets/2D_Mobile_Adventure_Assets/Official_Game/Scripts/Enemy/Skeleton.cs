@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Skeleton : Enemy, IDamageable
 {
+    [SerializeField]
+    private GameObject _diamondPrefab;
+
     public int Health { get ; set ; }
 
     public override void Init()
@@ -16,6 +19,10 @@ public class Skeleton : Enemy, IDamageable
 
     public void Damage()
     {
+
+        if (isDead == true)
+            return;
+
         Health--;
 
         Debug.Log("Skeleton Hit");
@@ -33,6 +40,11 @@ public class Skeleton : Enemy, IDamageable
         {
             isDead = true;
             animator.SetTrigger("Death");
+
+            GameObject di = Instantiate(_diamondPrefab, transform.position, Quaternion.identity);
+
+            di.GetComponent<Diamond>().value = base.gems;
+
         }
 
 
