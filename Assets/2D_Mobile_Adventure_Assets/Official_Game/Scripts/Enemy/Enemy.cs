@@ -101,7 +101,7 @@ public abstract class Enemy : MonoBehaviour
             spriteRenderer.flipX = false;
         }
 
-
+        
     }
 
 
