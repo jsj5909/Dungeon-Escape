@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour,IDamageable
 {
-    public int diamonds { get; set; }
+    public int diamonds;
     
     private Rigidbody2D _rigidBody;
 
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour,IDamageable
 
         _arcSprite = transform.GetChild(1).GetComponent<SpriteRenderer>();
 
-        diamonds = 0;
+        Health = 4;
 
     }
 
@@ -130,6 +130,13 @@ public class Player : MonoBehaviour,IDamageable
        
     }
 
+    public void AddGems(int amount)
+    {
+       diamonds += amount;
+
+        UIManager.Instance.UpdateGemCountText(diamonds);
+
+    }
    
 
     IEnumerator ResetJumpNeededRoutine()
@@ -141,11 +148,16 @@ public class Player : MonoBehaviour,IDamageable
 
     public void Damage()
     {
+        if (Health < 1)
+            return;
+        
         Health--;
+
+        UIManager.Instance.UpdateLives(Health);
 
         if(Health < 1)
         {
-            
+            _playerAnimation.Death();
         }
 
         Debug.Log("Player Damaged");

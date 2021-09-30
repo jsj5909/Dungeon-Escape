@@ -5,7 +5,7 @@ using UnityEngine;
 public class Diamond : MonoBehaviour
 {
 
-    public int value { get; set; }
+    public int value;
     
     // Start is called before the first frame update
     void Start()
@@ -21,8 +21,9 @@ public class Diamond : MonoBehaviour
         if(other.tag == "Player")
         {
             Debug.Log("Player picking up " + value + " diamonds!");
-            
-            other.GetComponent<Player>().diamonds += value;
+
+            other.GetComponent<Player>().AddGems(value);
+
             Destroy(this.gameObject);
             Debug.Log("Player has " + other.GetComponent<Player>().diamonds + " diamonds");
             
